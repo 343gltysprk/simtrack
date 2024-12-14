@@ -36,7 +36,7 @@ class NuScenesDataset(PointCloudDataset):
         pipeline=None,
         class_names=None,
         test_mode=False,
-        version="v1.0-trainval",
+        version="v1.0-mini",
         **kwargs,
     ):
         super(NuScenesDataset, self).__init__(
@@ -180,7 +180,7 @@ class NuScenesDataset(PointCloudDataset):
             "meta": None,
         }
 
-        nusc = NuScenes(version=version, dataroot=str(self._root_path), verbose=True)
+        nusc = NuScenes(version="v1.0-mini", dataroot=str(self._root_path), verbose=True)
 
         mapped_class_names = []
         for n in self._class_names:
@@ -320,7 +320,7 @@ class NuScenesDataset(PointCloudDataset):
             "meta": None,
         }
 
-        nusc = NuScenes(version=version, dataroot=str(self._root_path), verbose=True)
+        nusc = NuScenes(version=version, dataroot='data', verbose=True)
 
         mapped_class_names = []
         for n in self._class_names:
@@ -364,7 +364,7 @@ class NuScenesDataset(PointCloudDataset):
             json.dump(nusc_annos, f)
 
         print(f"Finish generate predictions for testset, save to {res_path}")
-
+        
         from nuscenes.eval.tracking.evaluate import TrackingEval 
         from nuscenes.eval.common.config import config_factory as track_configs
 
@@ -373,11 +373,11 @@ class NuScenesDataset(PointCloudDataset):
         nusc_eval = TrackingEval(
             config=cfg,
             result_path=res_path,
-            eval_set='val',
+            eval_set="mini_val",
             output_dir=output_dir,
             verbose=True,
-            nusc_version="v1.0-trainval",
-            nusc_dataroot=self._root_path,
+            nusc_version="v1.0-mini",
+            nusc_dataroot='data',
         )
         metrics_summary = nusc_eval.main()
-
+        

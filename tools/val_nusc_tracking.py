@@ -63,7 +63,7 @@ def tracking():
     cpu_device = torch.device("cpu")
 
     prev_detections = {}
-    nusc = NuScenes(version='v1.0-trainval', dataroot='./data/v1.0-trainval/', verbose=True)
+    nusc = NuScenes(version='v1.0-mini', dataroot='./data', verbose=True)
     grids = meshgrid(size_w, size_h)
 
     start_id = 0
@@ -144,6 +144,7 @@ def tracking():
             for k, v in result_dict["results"].items():
                 print(f"Evaluation {k}: {v}")
     
+    #breakpoint()
     # eval tracking
     dataset.evaluation_tracking(copy.deepcopy(predictions), output_dir=args.work_dir, testset=False)
 
