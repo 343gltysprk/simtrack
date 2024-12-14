@@ -12,23 +12,20 @@ Exploring Simple 3D Multi-Object Tracking for Autonomous Driving, ICCV 2021<br>
 Please refer to [INSTALL](INSTALL.md) for the detail.
 
 ### Data Preparation 
-* [nuScenes](https://www.nuscenes.org)
+* Down load [nuScenes mini]([https://www.nuscenes.org](https://www.nuscenes.org/nuscenes#download))
 ```
-python ./tools/create_data.py nuscenes_data_prep --root_path=NUSCENES_TRAINVAL_DATASET_ROOT --version="v1.0-trainval" --nsweeps=10
-```
-* [Waymo Open Dataset](https://waymo.com/open/) (TODO)
-
-### Training
-```
-python -m torch.distributed.launch --nproc_per_node=8 ./tools/train.py examples/point_pillars/configs/nusc_all_pp_centernet_tracking.py --work_dir SAVE_DIR
+python ./tools/create_data.py nuscenes_data_prep --root_path=NUSCENES_TRAINVAL_DATASET_ROOT --version="v1.0-mini" --nsweeps=10
 ```
 
-### Test
-In `./model_zoo` we provide our trained (pillar based) model on nuScenes.          
-Note: We currently only support inference with a single GPU.
+Soft link the dataset to this directory.
+
+### Run
+
 ```
-python ./tools/val_nusc_tracking.py examples/point_pillars/configs/nusc_all_pp_centernet_tracking.py --checkpoint CHECKPOINTFILE  --work_dir SAVE_DIR
+python ./tools/val_nusc_tracking.py examples/point_pillars/configs/nusc_all_pp_centernet_tracking.py --checkpoint model_zoo/simtrack_pillar.pth --work_dir experiments
 ```
+
+If you encounter problems during evaluation, try upgrading nuscenes-devkit.
 
 ## Citation
 Please cite the following paper if this repo helps your research:
