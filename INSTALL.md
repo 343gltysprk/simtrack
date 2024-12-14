@@ -9,7 +9,7 @@ Modified from [Det3D](https://github.com/poodarchu/Det3D/blob/master/INSTALLATIO
 
 ## Setup
 ```
-git clone https://github.com/qcraftai/simtrack.git
+git clone https://github.com/343gltysprk/simtrack.git
 cd simtrack
 pip install -r requirements.txt
 ```
