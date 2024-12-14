@@ -13,6 +13,14 @@ git clone https://github.com/qcraftai/simtrack.git
 cd simtrack
 pip install -r requirements.txt
 ```
+
+* Install Det3D
+
+```
+python setup.py build develop
+```
+
+
 * Compile CUDA code for IOU3D_NMS.
 ``` 
 cd det3d/ops/iou3d_nms
